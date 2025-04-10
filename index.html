@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="NarrowItDownApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="public/styles/bootstrap.min.css" />
+    <link rel="stylesheet" href="public/styles/styles.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/angular@1.5.7/angular.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/angular@1.5.7/angular-csp.min.css"
+      rel="stylesheet"
+    />
+
+    <title>Narrow Down Your Menu Choice</title>
+  </head>
+
+  <body ng-controller="NarrowItDownController as narrowItDown">
+    <div class="container">
+      <h1 class="title">Narrow Down Your Chinese Menu Choice</h1>
+
+      <div class="top-container">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="search term"
+            class="form-control"
+            ng-model="narrowItDown.search"
+          />
+        </div>
+
+        <div class="form-group narrow-button">
+          <button
+            type="button"
+            class="btn btn-primary"
+            ng-click="narrowItDown.searchTerm()"
+          >
+            Narrow It Down For Me!
+          </button>
+        </div>
+      </div>
+
+      <found-items
+        found-items="narrowItDown.foundItems"
+        on-remove="narrowItDown.removeItem(index)"
+      ></found-items>
+
+      <div class="error-message" ng-if="narrowItDown.error">
+        <p>{{ narrowItDown.error }}</p>
+      </div>
+
+      <div ng-if="narrowItDown.loading" class="loader"></div>
+    </div>
+
+    <script src="public/app.js"></script>
+  </body>
+</html>
